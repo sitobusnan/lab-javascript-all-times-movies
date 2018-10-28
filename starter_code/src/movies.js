@@ -1,34 +1,57 @@
 /* eslint no-restricted-globals: 'off' */
 // Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(newObject) {
-  var Objreturn = [];
-  var minutes = 0;
-
-  newObject.forEach(function(element) {
-    minutes = element.duration;
-    if((minutes.indexOf('h'))!=-1||(minutes.indexOf('m')!=-1)){
-      console.log(minutes)
-      minutes = minutes.split(' ');
-      if (minutes.length == 2) {
-        minutes = parseInt(minutes[0]) * 60 + parseInt(minutes[1]);
-      } else 
-      {
-        if (minutes[0].length > 3) 
-        {
-          minutes = parseInt(minutes[0]);
-        } else {
-          minutes = parseInt(minutes[0]) * 60;
-        }
+  console.log(newObject)
+  var modifiedObject = [];
+  //newObject.forEach(function(element){
+  //  console.log(element.duration)
+  //})
+  modifiedObject = newObject.map(function(element){
+    if(typeof(element.duration) != 'number'){
+      if (element.duration.length < 4){
+        element.duration = parseInt (element.duration) * 60; 
+      }
+      else if(element.duration.length === 4 || element.duration.length === 5){
+        element.duration = parseInt (element.duration);
+        
+      }
+      else{
+        element.duration = parseInt(element.duration.split(" ")[0]) * 60 + parseInt(element.duration.split(" ")[1])
+  
       }
     }
-  
+    
+    
+    return element;
+  })
+  return modifiedObject;
+  //newObject.forEach(function(element) {
+  //  console.log(elemet.duration)
+  //  minutes = element.duration;
+  //  if((minutes.indexOf('h'))!=-1||(minutes.indexOf('m')!=-1)){
+  //    //console.log(minutes)
+  //    minutes = minutes.split(' ');
+  //    if (minutes.length == 2) {
+  //      minutes = parseInt(minutes[0]) * 60 + parseInt(minutes[1]);
+  //    } else 
+  //    {
+  //      if (minutes[0].length > 3) 
+  //      {
+  //        minutes = parseInt(minutes[0]);
+  //      } else {
+  //        minutes = parseInt(minutes[0]) * 60;
+  //      }
+  //    }
+  //  }
+  //
+//
+  //  //console.log(minutes);
+  //  element.duration = minutes;
+//
+  //  Objreturn.push(element);
+  //});
 
-    element.duration = minutes;
-
-    Objreturn.push(element);
-  });
-
-  return Objreturn;
+  //return Objreturn;
 }
 
 // Get the average of all rates with 2 decimals
